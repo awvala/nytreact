@@ -1,10 +1,11 @@
 import React from "react";
-import "./Jumbotron.css";
 
-const Nav = ({ children }) => (
-  <div className="jumbotron">
-    {children}
-  </div>
+const Nav = () => (
+  <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a className="navbar-brand" href="/">
+      NY Times Article Scrubber
+    </a>
+  </nav>
 );
 
 export default Nav;
