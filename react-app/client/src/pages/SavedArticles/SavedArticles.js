@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
+import Article from "../../components/Article";
 
 class Detail extends Component {
     state = {
@@ -49,7 +50,7 @@ class Detail extends Component {
                       date={article.date}
                     />
                     )
-                  )) : <H1>There are no saved articles.</H1>
+                  )) : <h1>There are no saved articles.</h1>
                 }
                 </div>
             </div>
