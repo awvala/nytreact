@@ -15,19 +15,11 @@ class Detail extends Component {
     };
 
     loadArticles = () => {
-        API.getArticles().then(results => {
+        API
+          .getArticles()
+          .then(results => {
             this.setState({savedArticles: results.data})
           })
-      };
-
-      deleteArticle = id => {
-        API.deleteArticle(id).then(results => {
-            //once deleted, they are removed from the state and articles are rendered
-            let savedArticles = this.state.savedArticles.filter(article => article._id !== id)
-            this.setState({savedArticles: savedArticles})
-            this.loadArticles();
-          })
-          .catch(err => console.log(err));
       };
   
     render() {
