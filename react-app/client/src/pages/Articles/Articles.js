@@ -17,15 +17,15 @@ class Articles extends Component {
         currentSearch: ""
     };
 
-    loadArticles = () => {
-        API.getArticles()
-            .then(res =>
-                this.setState({
-                    articles: res.data,
-                })
-            )
-            .catch(err => console.log(err));
-    };
+    //loadArticles = () => {
+    //    API.getArticles()
+    //        .then(res =>
+    //            this.setState({
+    //                articles: res.data,
+    //            })
+    //        )
+    //        .catch(err => console.log(err));
+    //};
 
     saveArticle = (articleID) => {
         let element = document.getElementById(articleID);   
@@ -34,7 +34,6 @@ class Articles extends Component {
         let date = cardBodyElement.children[0].innerText;
         let url = cardBodyElement.children[2].getAttribute("href");
         let snippet = cardBodyElement.children[1].innerText;
-        
         
         let newArticle = {
             date: date,
