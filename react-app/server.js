@@ -6,6 +6,9 @@ const app = express();
 const logger = require('morgan');
 const PORT = process.env.PORT || 3001;
 
+// Tell Mongoose to use ES6 promises.
+mongoose.Promise = Promise;
+
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -14,12 +17,11 @@ app.use(logger('combined'))
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
+} else {
+  app.use(express.static(__dirname + "/client/public"));
 }
 // Add routes, both API and view
 app.use(routes);
-
-// Set up promises with mongoose
-mongoose.Promise = global.Promise;
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
