@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import SaveBtn from "../../components/SaveBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import { Input, FormBtn, TextArea } from "../../components/Form";
-
+import { List, ListItem } from "../../components/List";
+import { Input, FormBtn } from "../../components/Form";
 
 class Articles extends Component {
     state = {
@@ -79,17 +80,17 @@ class Articles extends Component {
             queryURL += `&fq=${topic}`
         }
 
-        if (sYear) {
+        if (startYear) {
             queryURL += `&begin_date=${startYear}`
         }
 
-        if (eYear) {
+        if (endYear) {
             queryURL += `&end_date=${endYear}`
         }
 
         queryURL += APIkey;
 
-        API.queryNYT(queryUrl).then(results => {
+        API.queryNYT(queryURL).then(results => {
             this.setState({
                 articles: [...this.state.results, ...results.data.response.docs],
                 currentSearch: query,
@@ -150,14 +151,34 @@ class Articles extends Component {
                                 disabled={!(this.state.topic && !this.state.startYear && !this.state.endYear)}
                                 onClick={this.handleFormSubmit}
                             >
-                                Submit Book
+                                Search
                                     </FormBtn>
                         </form>
                     </Col>
-                        
+                    <Col size="md-6 sm-12">
+                        <Jumbotron>
+                            <h1>Returned Articles</h1>
+                        </Jumbotron>
+                        {this.state.articles.length ? (
+                            <List>
+                                {this.state.articles.map(article => (
+                                    <ListItem key={article._id}>
+                                        <Link to={"/articles/" + article._id}>
+                                            <strong>
+                                                {article.topic} date: {article.date}
+                                            </strong>
+                                        </Link>
+                                        <SaveBtn onClick={() => this.saveArticle(article._id)} />
+                                    </ListItem>
+                                ))}
+                            </List>
+                        ) : (
+                                <h3>No Results to Display</h3>
+                            )}
+                    </Col>
                 </Row>
-            </Container >
-                    );
+            </Container>
+        );
     }
 }
 
