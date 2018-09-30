@@ -12,6 +12,12 @@ const articleSchema = new Schema({
   },
   date: {
       type: String,
+  },
+  _id : {
+      type: String
+  },
+  snippet: {
+    type: String
   }
 });
 
