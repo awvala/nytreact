@@ -6,7 +6,7 @@ export default {
     return axios.get("/api/articles");
   },
   // Gets the article with the given id
-  getArticles: function(id) {
+  getArticle: function(id) {
     return axios.get("/api/articles/" + id);
   },
   // Deletes the article with the given id
@@ -16,5 +16,10 @@ export default {
   // Saves an article to the database
   saveArticles: function(articleData) {
     return axios.post("/api/articles", articleData);
+  },
+  queryNYTAPI: function (queryURL) {
+    return axios.get(queryURL);
   }
+
+
 };

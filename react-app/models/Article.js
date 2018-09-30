@@ -12,10 +12,6 @@ const articleSchema = new Schema({
   },
   date: {
       type: String,
-  },
-  saved: {
-    type: boolean,
-    default: false,
   }
 });
 

@@ -24,7 +24,9 @@ class Articles extends Component {
     loadArticles = () => {
         API.getArticles()
             .then(res =>
-                this.setState({ articles: res.data, topic: "", url: "", date: "" })
+                this.setState({ 
+                    articles: res.data, 
+                })
             )
             .catch(err => console.log(err));
     };
@@ -36,12 +38,11 @@ class Articles extends Component {
             date: article.pub_date,
             topic: article.headline.main,
             url: article.web_url,
-            summary: article.snippet
         }
 
-        API.saveArticle(newArticle).then(articles => {
+        API.saveArticles(newArticle).then(articles => {
             //removing the saved article from the articles in state
-            let unsavedArticles = this.state.articles.filter(article => article.headline.main !== newArticle.title)
+            let unsavedArticles = this.state.articles.filter(article => article.headline.main !== newArticle.topic)
             this.setState({ articles: unsavedArticles })
         })
             .catch(err => console.log(err));
@@ -81,18 +82,19 @@ class Articles extends Component {
         }
 
         if (startYear) {
-            queryURL += `&begin_date=${startYear}`
+            queryURL += `&begin_date=${startYear}0101`
         }
 
         if (endYear) {
-            queryURL += `&end_date=${endYear}`
+            queryURL += `&end_date=${endYear}1231`
         }
 
         queryURL += APIkey;
 
-        API.queryNYT(queryURL).then(results => {
+        API.queryNYTAPI(queryURL).then(results => {
+            console.log(results);
             this.setState({
-                articles: [...this.state.results, ...results.data.response.docs],
+                articles: [...this.state.articles, ...results.data.response.docs],
                 currentSearch: query,
                 topic: '',
                 startYear: '',
@@ -148,7 +150,7 @@ class Articles extends Component {
                                 placeholder="End Year (required)"
                             />
                             <FormBtn
-                                disabled={!(this.state.topic && !this.state.startYear && !this.state.endYear)}
+                                disabled={!(this.state.topic && this.state.startYear && this.state.endYear)}
                                 onClick={this.handleFormSubmit}
                             >
                                 Search
