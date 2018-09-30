@@ -24,7 +24,7 @@ class Articles extends Component {
     loadArticles = () => {
         API.getArticles()
             .then(res =>
-                this.setState({ articles: res.data, title: "", url: "", date: "" })
+                this.setState({ articles: res.data, topic: "", url: "", date: "" })
             )
             .catch(err => console.log(err));
     };
@@ -34,7 +34,7 @@ class Articles extends Component {
     saveArticle = (article) => {
         let newArticle = {
             date: article.pub_date,
-            title: article.headline.main,
+            topic: article.headline.main,
             url: article.web_url,
             summary: article.snippet
         }
