@@ -92,7 +92,7 @@ class Articles extends Component {
         queryURL += APIkey;
 
         API.queryNYTAPI(queryURL).then(results => {
-            console.log(results);
+            //console.log(results);
             this.setState({
                 articles: [...this.state.articles, ...results.data.response.docs],
                 currentSearch: query,
