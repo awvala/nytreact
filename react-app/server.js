@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 

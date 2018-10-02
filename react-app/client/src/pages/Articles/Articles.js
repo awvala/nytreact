@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
-import Article from "../../components/Article/Article";
+import Article from "../../components/Article";
 
 class Articles extends Component {
     state = {

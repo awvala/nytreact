@@ -19,8 +19,7 @@ class SavedArticles extends Component {
     API.getArticles().then(res => {
       console.log(res);
       this.setState({
-        sArticles: 
-          res.data
+        sArticles: res.data
       })
     }).catch(err => console.log(err));
 };

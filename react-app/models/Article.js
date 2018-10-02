@@ -14,10 +14,10 @@ const articleSchema = new Schema({
       type: String,
   },
   _id : {
-      type: String
+      type: String,
   },
   snippet: {
-    type: String
+    type: String,
   }
 });
 
